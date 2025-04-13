@@ -1,81 +1,100 @@
-/* Reset some basic elements */
+/* General Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Set background and typography styles */
-  body {
-    font-family: 'Arimo', sans-serif;
-    background-image: url('farm.jpg');
-    background-size: cover;
-    background-position: center;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 0 20px;
-  }
-  
-  /* Styling for the login container */
-  .login {
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 10px;
-    padding: 40px;
-    width: 400px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  /* Heading style */
-  .login h1 {
-    font-family: 'Pacifico', cursive;
-    color: #6c63ff;
-    margin-bottom: 20px;
-  }
-  
-  /* Input fields styling */
-  .login input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    font-size: 16px;
-    transition: border-color 0.3s;
-    background-color: rgba(255, 255, 255, 0.8);
-  }
-  
-  /* Input field focus effect */
-  .login input:focus {
-    border-color: #6c63ff;
-    outline: none;
-  }
-  
-  /* Button styling */
-  .login button {
-    background-color: #6c63ff;
-    color: #fff;
-    border: none;
-    padding: 12px 20px;
-    width: 100%;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  /* Button hover effect */
-  .login button:hover {
-    background-color: #5a54e8;
-  }
-  
-  /* Prediction text style */
-  #predi {
-    color: #fff;
-    font-size: 18px;
-    margin-top: 20px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Full-Page Background with Image */
+body {
+  background: url("/static/Background.jpg") no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #fff;
+  padding: 20px;
+}
+
+/* Glassmorphism Effect */
+.login {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  width: 420px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Heading */
+.login h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 28px;
+  color: #ffdf85;
+  margin-bottom: 10px;
+}
+
+.login p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Input Fields */
+.login input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.3); /* Light transparent background */
+  color: #fff;
+  transition: 0.3s ease-in-out;
+  outline: none;
+}
+
+/* Improve Placeholder Visibility */
+.login input::placeholder {
+  color: rgba(255, 255, 255, 0.8); /* Light color for better contrast */
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Shadow for visibility */
+}
+
+/* Input Focus Effect */
+.login input:focus {
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(1.05);
+}
+
+/* Submit Button */
+.login button {
+  background: linear-gradient(to right, #ff9800, #ff5722);
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 8px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  margin-top: 10px;
+}
+
+/* Reset Button Styling */
+.reset-btn {
+  background: linear-gradient(to right, #6c757d, #495057);
+}
+
+.login button:hover {
+  transform: scale(1.05);
+}
+
+/* Prediction Text */
+#predi {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffdf85;
+}

@@ -1,67 +1,62 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>ML API</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Arimo&family=Hind:wght@300&family=Open+Sans+Condensed:wght@300&display=swap"
-      rel="stylesheet"
-    />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Prediction Model</title>
     
-    <link 
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
-    />
-    <style></style>
-  </head>
-
-  <body>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
     <div class="login">
-      <h1>Crop Prediction Model</h1>
-      <form action="{{ url_for('predict')}}" method="post">
-        <input
-          type="text"
-          name="Nitrogen"
-          placeholder="Nitrogen"
-          required="required"
-        />
-        <input
-          type="text"
-          name="Phosphorus"
-          placeholder="Phosphorus"
-          required="required"
-        />
-        <input
-          type="text"
-          name="Potassium"
-          placeholder="Potassium"
-          required="required"
-        />
-        <input
-          type="text"
-          name="temperature"
-          placeholder="Temperature"
-          required="required"
-        />
-        <input
-          type="text"
-          name="humidity"
-          placeholder="Humidity"
-          required="required"
-        />
-        <input type="text" name="pH" placeholder="pH" required="required" />
-        <input
-          type="text"
-          name="rainfall"
-          placeholder="Rainfall"
-          required="required"
-        />
-        <button type="submit" class="btn btn-primary btn-block btn-large">
-          Predict
-        </button>
-      </form>
-      <br /><br />
-      <h1 id="predi">{{ prediction_text }}</h1>
+        <h1>Crop Prediction Model</h1>
+        
+        <form id="prediction-form">
+            <input type="text" name="Nitrogen" placeholder="Nitrogen" required />
+            <input type="text" name="Phosphorus" placeholder="Phosphorus" required />
+            <input type="text" name="Potassium" placeholder="Potassium" required />
+            <input type="text" name="temperature" placeholder="Temperature" required />
+            <input type="text" name="humidity" placeholder="Humidity" required />
+            <input type="text" name="pH" placeholder="pH" required />
+            <input type="text" name="rainfall" placeholder="Rainfall" required />
+            
+            <button type="submit" id="predict-btn">Predict</button>
+            <button type="button" id="reset-btn">Reset</button>
+        </form>
+
+        <h1 id="prediction-result"></h1>
     </div>
-  </body>
+
+    <script>
+        document.getElementById("prediction-form").addEventListener("submit", async function(event) {
+            event.preventDefault(); // Prevents page refresh
+
+            let formData = new FormData(this);
+
+            try {
+                let response = await fetch("/predict", {
+                    method: "POST",
+                    body: formData
+                });
+
+                let data = await response.json();
+
+                if (data.error) {
+                    document.getElementById("prediction-result").innerHTML = "Error: " + data.error;
+                } else {
+                    document.getElementById("prediction-result").innerHTML = data.prediction;
+                }
+            } catch (error) {
+                console.error("Error fetching prediction:", error);
+                document.getElementById("prediction-result").innerHTML = "Error: Could not get prediction";
+            }
+        });
+
+        document.getElementById("reset-btn").addEventListener("click", function() {
+            document.getElementById("prediction-form").reset();
+            document.getElementById("prediction-result").innerHTML = "";
+        });
+    </script>
+</body>
 </html>
